@@ -129,7 +129,7 @@
 
 <body ng-app="dash" ng-controller="dashctrl">
 
-    <div class="user" ng-show="dashboard">
+    <div class="user" ng-show="!hidesignlog">
         <form class="back sign" id="back" name="form" ng-submit="callSubmit(form)" novalidate>
 
             <input type="email" name="em1" ng-model="em1" id="em1" placeholder="Enter email-id" required><br>
@@ -160,7 +160,7 @@
         
     </div>
 
-    <div class="dashboard" ng-show="!hidesignlog">
+    <div class="dashboard" ng-show="dashboard">
 
         <!-- <h1>I am back</h1> -->
     </div>
