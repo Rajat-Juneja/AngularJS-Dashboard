@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+
+    <style>
+        .user{
+            width: 100%;
+            height:600px;
+            margin: 10% auto 0;
+            text-align: center;
+            perspective:750px;
+            position: relative;
+        }
+        .front, .back{
+            position:absolute;
+            width: 100%;
+            height: 100%;
+            transition: 1s;
+        }
+        .back{
+            transform: rotateX(90deg);
+        }
+        input, button{
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+        }
+        button{
+            font-weight: 500;
+        }
+    </style>
+
+
+
+    <script>
+    const dash = angular.module("dash",[]);
+
+
+    dash.controller("dashctrl",($scope)=>{
+        var users = ['adminrajat@gmail.com'];
+        var pass = ['rajat'];
+        var admin = false;
+        angular.element(document.querySelector('body')).css('overflow','hidden');
+        $scope.logKaro=()=>{
+            angular.element(document.querySelector("#front")).css('transform','rotateX(0deg)');
+            angular.element(document.querySelector("#back")).css('transform','rotateX(90deg)');
+        };
+        $scope.signKaro=()=>{
+            angular.element(document.querySelector("#front")).css('transform','rotateX(-90deg)');
+            angular.element(document.querySelector("#back")).css('transform','rotateX(0deg)');
+        };
+        $scope.callSubmit = (form) => {
+            if (form.$valid) {
+                var alreadyExist=false;
+            for(let i=0;i<users.length;i++){
+                if(users[i]==form.em1.$modelValue){
+                alert("Same User-id exists");
+                form.em1.$$element[0].value="";
+                form.pa1.$$element[0].value="";
+                return;
+            }
+            }
+                alert("Submitted the form");
+                users.push(form.em1.$modelValue);
+                pass.push(form.pa1.$modelValue); 
+                form.em1.$$element[0].value="";
+                form.pa1.$$element[0].value="";   
+                $scope.logKaro();
+            } 
+            else {
+                alert("Can't submit, fill the required fields properly");
+            }
+        };
+        $scope.callLogin = (form2) => {
+            var flag = true;
+
+            if(form2.$valid){
+                // console.log(users[0] +" && "+ pass[0] );
+                // console.log(form2.em2.$$element);
+            for(let i=0;i<users.length;i++){
+                if(users[i]==form2.em2.$modelValue && pass[i]==form2.pa2.$modelValue){
+                    $scope.hidesignlog=true;
+                    if(form2.em2.$modelValue == 'adminrajat@gmail.com'){
+                        admin=true;
+                    }
+                    $scope.dashboard=true;
+                    angular.element(document.querySelector('body')).css('overflow','visible');
+                    flag=false;
+                }
+            }
+            if(flag){
+                
+                form2.em2.$$element[0].value="";
+                form2.pa2.$$element[0].value="";
+                alert("Can't submit, fill the required fields properly");
+                return;
+            }
+        }
+        else{
+            
+            form2.em2.$$element[0].value="";
+                form2.pa2.$$element[0].value="";
+                alert("Can't submit, fill the required fields properly");
+                return;
+        }
+        };
+
+
+
+    });
+    </script>
+
+</head>
+
+
+<body ng-app="dash" ng-controller="dashctrl">
+
+    <div class="user" ng-show="dashboard">
+        <form class="back sign" id="back" name="form" ng-submit="callSubmit(form)" novalidate>
+
+            <input type="email" name="em1" ng-model="em1" id="em1" placeholder="Enter email-id" required><br>
+            <p ng-show="form.em1.$touched && form.em1.$invalid">Please fill your email</p>
+            <br>
+            <input type="password" name="pa1" id="pa1" ng-model="pa1" placeholder="Enter password" required ng-minlength="3" ng-maxlength="10"><br>
+            <p ng-show="form.pa1.$touched && form.pa1.$invalid">Please fill your password of length 3&cuepr;length &cuepr; 10 </p>
+            <br><br>
+
+            <button type="submit" ng-disabled="!form.$valid">SIGN UP</button>&nbsp;
+            <button ng-click="logKaro()" type="button">Already Signed Up?</button>
+        </form>
+
+
+        <form class="front log" id="front" name="form2" ng-submit="callLogin(form2)" novalidate>
+
+                <input type="email" name="em2" ng-model="em2" id="em2" placeholder="Enter email-id" required><br>
+                <p ng-show="form2.em2.$touched && form2.em2.$invalid">Please fill your email</p>
+                <br>
+                <input type="password" name="pa2" id="pa2" ng-model="pa2" placeholder="Enter password" required><br>
+                <p ng-show="form2.pa2.$touched && form2.pa2.$invalid">Please fill your password</p>
+                <br><br>
+    
+                <button ng-click="signKaro()" type="button">New User?</button>&nbsp;
+                <button type="submit" ng-click="callLogin(form2)" ng-disabled="!form2.$valid">LOG IN</button>
+
+        </form>
+        
+    </div>
+
+    <div class="dashboard" ng-show="!hidesignlog">
+
+        <!-- <h1>I am back</h1> -->
+    </div>
+    
+</body>
+</html>

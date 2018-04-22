@@ -1,0 +1,22 @@
+{
+  "name": "AngularJS-Dashboard",
+  "authors": [
+    "Rajat-Juneja <junejarajat98@gmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.10",
+    "bootstrap": "^4.1.0",
+    "angular-route": "^1.6.10"
+  }
+}
