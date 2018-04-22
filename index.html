@@ -42,6 +42,88 @@
         button{
             font-weight: 500;
         }
+
+        .dashboard .row{
+            margin: 0;
+        }
+
+        .navbar{
+            text-align: left;
+            background-color: #95b3a7;
+            border-bottom-right-radius: 100%;
+            width: 20%;
+            border-top-right-radius: 10%;
+            /* animation-duration: all ease 5s;
+            transition-duration: all ease 5s;
+            transition: all ease 5s; */
+        }
+        
+
+        .navbar h4{
+            width: 100%;
+            font-weight: 700;
+        }
+
+        .navbar ul{
+            padding: 0;
+            width: 100%;
+        }
+
+        .navbar ul li{
+            list-style: none;
+            margin: 8% 0 8%;
+            
+        }
+        .navbar ul li a{
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+            text-decoration: none;
+            text-shadow: 2px 3px 0px black;
+            transition: 0.3s ease-in-out;
+        }
+
+        .navbar ul li:hover a{
+            text-shadow: -3px -3px 0px white;
+            color: black;
+        }
+
+        .navbar button{
+            border-radius: 50%;
+            padding: 2% 4%;
+            cursor: pointer;
+            border: none;
+        }
+ 
+        .dashboard span.arrow{
+            font-size: 60px;
+            margin-left: 2%;
+            cursor: pointer;
+            animation: moving 3.5s ease-in-out infinite;
+            z-index: 9999;
+        }
+
+        @keyframes moving{
+            0%{
+                padding-left: 0%;
+            }
+            8%{
+                padding-left: 1.5%
+            }
+            16%{
+                padding-left: 0;
+            }
+            25%{
+                padding-left: 1.5%;
+            }
+            33%{
+                padding-left: 0%;
+            }
+            100%{
+                padding-left: 0;
+            }
+        } 
+
     </style>
 
 
@@ -53,7 +135,7 @@
     dash.controller("dashctrl",($scope)=>{
         var users = ['adminrajat@gmail.com'];
         var pass = ['rajat'];
-        var admin = false;
+        $scope.admin = false;
         angular.element(document.querySelector('body')).css('overflow','hidden');
         $scope.logKaro=()=>{
             angular.element(document.querySelector("#front")).css('transform','rotateX(0deg)');
@@ -95,7 +177,7 @@
                 if(users[i]==form2.em2.$modelValue && pass[i]==form2.pa2.$modelValue){
                     $scope.hidesignlog=true;
                     if(form2.em2.$modelValue == 'adminrajat@gmail.com'){
-                        admin=true;
+                        $scope.admin=true;
                     }
                     $scope.dashboard=true;
                     angular.element(document.querySelector('body')).css('overflow','visible');
@@ -119,7 +201,7 @@
         }
         };
 
-
+        
 
     });
     </script>
@@ -162,7 +244,29 @@
 
     <div class="dashboard" ng-show="dashboard">
 
-        <!-- <h1>I am back</h1> -->
+
+        <span ng-show="showMe" ng-click="showMe=!showMe" class="arrow">&#8594;</span>
+
+            <div class="navbar" ng-show="!showMe">
+                <h4>DASHBOARD</h4>
+                <ul>
+                    <li><a href="">Profile</a></li>
+                    <li><a href="">Page.js</a></li>
+                    <li><a href="">3d Cube</a></li>
+                    <li ng-style="!admin?{'display':'none'}:{'display':'block'}"><a href="">Users</a></li>
+                    <li><a href="">Log Out</a></li>
+                    <button ng-click="showMe=!showMe">X</button>
+                </ul>
+
+            </div>
+
+
+
+            <div class="content">
+
+            </div>
+       
+
     </div>
     
 </body>
