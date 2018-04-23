@@ -10,201 +10,21 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="custom.css">
 
-
-
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"> -->
+    <script src="https://use.fontawesome.com/becd647f77.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
-
-    <style>
-        .user{
-            width: 100%;
-            height:600px;
-            margin: 10% auto 0;
-            text-align: center;
-            perspective:750px;
-            position: relative;
-        }
-        .front, .back{
-            position:absolute;
-            width: 100%;
-            height: 100%;
-            transition: 1s;
-        }
-        .back{
-            transform: rotateX(90deg);
-        }
-        input, button{
-            text-align: center;
-            font-weight: 700;
-            letter-spacing: 2.5px;
-        }
-        button{
-            font-weight: 500;
-        }
-
-        .dashboard .row{
-            margin: 0;
-        }
-
-        .navbar{
-            text-align: left;
-            background-color: #95b3a7;
-            border-bottom-right-radius: 100%;
-            width: 20%;
-            border-top-right-radius: 10%;
-            /* animation-duration: all ease 5s;
-            transition-duration: all ease 5s;
-            transition: all ease 5s; */
-        }
-        
-
-        .navbar h4{
-            width: 100%;
-            font-weight: 700;
-        }
-
-        .navbar ul{
-            padding: 0;
-            width: 100%;
-        }
-
-        .navbar ul li{
-            list-style: none;
-            margin: 8% 0 8%;
-            
-        }
-        .navbar ul li a{
-            color: white;
-            font-weight: 700;
-            font-size: 24px;
-            text-decoration: none;
-            text-shadow: 2px 3px 0px black;
-            transition: 0.3s ease-in-out;
-        }
-
-        .navbar ul li:hover a{
-            text-shadow: -3px -3px 0px white;
-            color: black;
-        }
-
-        .navbar button{
-            border-radius: 50%;
-            padding: 2% 4%;
-            cursor: pointer;
-            border: none;
-        }
- 
-        .dashboard span.arrow{
-            font-size: 60px;
-            margin-left: 2%;
-            cursor: pointer;
-            animation: moving 3.5s ease-in-out infinite;
-            z-index: 9999;
-        }
-
-        @keyframes moving{
-            0%{
-                padding-left: 0%;
-            }
-            8%{
-                padding-left: 1.5%
-            }
-            16%{
-                padding-left: 0;
-            }
-            25%{
-                padding-left: 1.5%;
-            }
-            33%{
-                padding-left: 0%;
-            }
-            100%{
-                padding-left: 0;
-            }
-        } 
-
-    </style>
+    <script src="Value.js"></script>
 
 
 
-    <script>
-    const dash = angular.module("dash",[]);
+    <script src="main.js"></script>
+<script src="controller.js"></script>
+<script src="controller2.js"></script>
 
-
-    dash.controller("dashctrl",($scope)=>{
-        var users = ['adminrajat@gmail.com'];
-        var pass = ['rajat'];
-        $scope.admin = false;
-        angular.element(document.querySelector('body')).css('overflow','hidden');
-        $scope.logKaro=()=>{
-            angular.element(document.querySelector("#front")).css('transform','rotateX(0deg)');
-            angular.element(document.querySelector("#back")).css('transform','rotateX(90deg)');
-        };
-        $scope.signKaro=()=>{
-            angular.element(document.querySelector("#front")).css('transform','rotateX(-90deg)');
-            angular.element(document.querySelector("#back")).css('transform','rotateX(0deg)');
-        };
-        $scope.callSubmit = (form) => {
-            if (form.$valid) {
-                var alreadyExist=false;
-            for(let i=0;i<users.length;i++){
-                if(users[i]==form.em1.$modelValue){
-                alert("Same User-id exists");
-                form.em1.$$element[0].value="";
-                form.pa1.$$element[0].value="";
-                return;
-            }
-            }
-                alert("Submitted the form");
-                users.push(form.em1.$modelValue);
-                pass.push(form.pa1.$modelValue); 
-                form.em1.$$element[0].value="";
-                form.pa1.$$element[0].value="";   
-                $scope.logKaro();
-            } 
-            else {
-                alert("Can't submit, fill the required fields properly");
-            }
-        };
-        $scope.callLogin = (form2) => {
-            var flag = true;
-
-            if(form2.$valid){
-                // console.log(users[0] +" && "+ pass[0] );
-                // console.log(form2.em2.$$element);
-            for(let i=0;i<users.length;i++){
-                if(users[i]==form2.em2.$modelValue && pass[i]==form2.pa2.$modelValue){
-                    $scope.hidesignlog=true;
-                    if(form2.em2.$modelValue == 'adminrajat@gmail.com'){
-                        $scope.admin=true;
-                    }
-                    $scope.dashboard=true;
-                    angular.element(document.querySelector('body')).css('overflow','visible');
-                    flag=false;
-                }
-            }
-            if(flag){
-                
-                form2.em2.$$element[0].value="";
-                form2.pa2.$$element[0].value="";
-                alert("Can't submit, fill the required fields properly");
-                return;
-            }
-        }
-        else{
-            
-            form2.em2.$$element[0].value="";
-                form2.pa2.$$element[0].value="";
-                alert("Can't submit, fill the required fields properly");
-                return;
-        }
-        };
-
-        
-
-    });
-    </script>
+<script src="spa-routes.js"></script>
 
 </head>
 
@@ -250,11 +70,11 @@
             <div class="navbar" ng-show="!showMe">
                 <h4>DASHBOARD</h4>
                 <ul>
-                    <li><a href="">Profile</a></li>
-                    <li><a href="">Page.js</a></li>
-                    <li><a href="">3d Cube</a></li>
-                    <li ng-style="!admin?{'display':'none'}:{'display':'block'}"><a href="">Users</a></li>
-                    <li><a href="">Log Out</a></li>
+                    <li><a ng-href="#/">Profile</a></li>
+                    <li><a ng-href="#/turn">Turn.js</a></li>
+                    <li><a ng-href="#/cube">3d Cube</a></li>
+                    <li ng-style="!admin?{'display':'none'}:{'display':'block'}"><a ng-href="#/userpage">Users</a></li>
+                    <li><a href="" ng-click="goBack()">Log Out</a></li>
                     <button ng-click="showMe=!showMe">X</button>
                 </ul>
 
@@ -263,7 +83,10 @@
 
 
             <div class="content">
-
+                <ng-view>
+                    <h1>Welcome to your own dashboard</h1>
+                    <h4>Please go forward and explore</h4>
+                </ng-view>
             </div>
        
 
