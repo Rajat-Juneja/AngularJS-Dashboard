@@ -1,6 +1,7 @@
 dash.controller("dashctrl",function($scope){
     $scope.admin = false;
-    $scope.allUsers = users;
+
+    // console.log($scope.allUsers);
     // angular.element(document.querySelector('body')).css('overflow','hidden');
     $scope.logKaro=()=>{
         angular.element(document.querySelector("#front")).css('transform','rotateX(0deg)');
@@ -14,7 +15,7 @@ dash.controller("dashctrl",function($scope){
         if (form.$valid) {
             var alreadyExist=false;
         for(let i=0;i<users.length;i++){
-            if(users[i]==form.em1.$modelValue){
+            if(users[i].id==form.em1.$modelValue){
             alert("Same User-id exists");
             form.em1.$$element[0].value="";
             form.pa1.$$element[0].value="";
@@ -22,8 +23,10 @@ dash.controller("dashctrl",function($scope){
         }
         }
             alert("Submitted the form");
-            users.push(form.em1.$modelValue);
-            pass.push(form.pa1.$modelValue); 
+            var i= users.length-1;
+            console.log(users.length);
+            users[i].id=form.em1.$modelValue;
+            users[i].pass=form.pa1.$modelValue; 
             form.em1.$$element[0].value="";
             form.pa1.$$element[0].value="";   
             $scope.logKaro();
@@ -39,7 +42,7 @@ dash.controller("dashctrl",function($scope){
             // console.log(users[0] +" && "+ pass[0] );
             // console.log(form2.em2.$$element);
         for(let i=0;i<users.length;i++){
-            if(users[i]==form2.em2.$modelValue && pass[i]==form2.pa2.$modelValue){
+            if((users[i].id==form2.em2.$modelValue && users[i].pass==form2.pa2.$modelValue) || (form2.em2.$modelValue==admin[0].id && form2.pa2.$modelValue==admin[0].pass )){
                 $scope.hidesignlog=true;
                 if(form2.em2.$modelValue == 'adminrajat@gmail.com'){
                     $scope.admin=true;
@@ -76,8 +79,9 @@ dash.controller("dashctrl",function($scope){
     $scope.goBack = () =>{
         $scope.hidesignlog=false;
         $scope.dashboard=false;
+        $scope.admin=false;
         // console.log(location.href.split(""));
-        location.href = location.href.split("#")[0];
+        // location.href = location.href.split("#")[0];
 
     };
 

@@ -1,4 +1,4 @@
-dash.controller("dashctrl2",function($scope,$rootScope,$interval){
+dash.controller("dashctrl2",function($scope,$interval){
     $interval(function(){
     $scope.user = loggedUser[0];
     if($scope.user){
