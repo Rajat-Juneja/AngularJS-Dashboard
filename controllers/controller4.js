@@ -1,7 +1,7 @@
 dash.controller("dashctrl4",function(){
 
 if($(document).width()>650){
-    console.log('IN >650');
+    // console.log('IN >650');
     $("#flipbook").turn({
         width: 600,
         height: 450,
@@ -10,7 +10,7 @@ if($(document).width()>650){
     });
 }
 else{
-    console.log('IN < 650');
+    // console.log('IN < 650');
     $("#flipbook").turn({
         width: 300,
         height: 350,

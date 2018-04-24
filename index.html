@@ -21,9 +21,9 @@
 
 
     <script src="main.js"></script>
-<script src="controller.js"></script>
-<script src="controller2.js"></script>
-<script src="controller3.js"></script>
+<script src="controllers/controller.js"></script>
+<script src="controllers/controller2.js"></script>
+<script src="controllers/controller3.js"></script>
 
 <script src="spa-routes.js"></script>
 
@@ -71,10 +71,11 @@
             <div class="navbar" ng-show="!showMe">
                 <h4>DASHBOARD</h4>
                 <ul>
-                    <li><a ng-href="#/">Profile</a></li>
-                    <li><a ng-href="#/turn">Turn.js</a></li>
-                    <li><a ng-href="#/cube">3d Cube</a></li>
-                    <li ng-style="!admin?{'display':'none'}:{'display':'block'}"><a ng-href="#/userpage">Users</a></li>
+                    <li><a ng-click="showMe=!showMe" ng-href="#/">Profile</a></li>
+                    <li><a ng-click="showMe=!showMe" ng-href="#/turn">Turn.js</a></li>
+                    <li><a ng-click="showMe=!showMe" ng-href="#/cube">3d Cube</a></li>
+                    <li ng-style="!admin?{'display':'none'}:{'display':'block'}"><a ng-click="showMe=!showMe" ng-href="#/userpage">Users</a></li>
+                    <li><a  href="" ng-style="admin?{'display':'none'}:{'display':'block'}" ng-click="deleteMe()">Delete Account</a></li>
                     <li><a href="" ng-click="goBack()">Log Out</a></li>
                     <button ng-click="showMe=!showMe">X</button>
                 </ul>
@@ -99,6 +100,6 @@
     crossorigin="anonymous"></script>
     
   <script src="turn.min.js"></script>
-  <script src="controller4.js"></script>
+  <script src="controllers/controller4.js"></script>
 </body>
 </html>

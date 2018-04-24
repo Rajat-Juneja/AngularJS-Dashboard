@@ -23,12 +23,11 @@ dash.controller("dashctrl",function($scope){
         }
         }
             alert("Submitted the form");
-            var i= users.length-1;
-            console.log(users.length);
-            users[i].id=form.em1.$modelValue;
-            users[i].pass=form.pa1.$modelValue; 
+            users.push({'id': form.em1.$modelValue, 'pass': form.pa1.$modelValue}); 
             form.em1.$$element[0].value="";
-            form.pa1.$$element[0].value="";   
+            form.pa1.$$element[0].value=""; 
+            // console.log($scope.em2);
+            $scope.em2 =   form.em1.$modelValue;;
             $scope.logKaro();
         } 
         else {
@@ -50,7 +49,8 @@ dash.controller("dashctrl",function($scope){
                 $scope.dashboard=true;
                 loggedUser[0] = form2.em2.$modelValue;
                 // console.log(loggedUser[0]);
-                $scope.user1 = loggedUser[0];
+                // $scope.user1 = loggedUser[0];
+                // console.log(loggedUser[0]);
                  
                 form2.em2.$$element[0].value="";
                 form2.pa2.$$element[0].value="";
@@ -80,9 +80,16 @@ dash.controller("dashctrl",function($scope){
         $scope.hidesignlog=false;
         $scope.dashboard=false;
         $scope.admin=false;
-        // console.log(location.href.split(""));
-        // location.href = location.href.split("#")[0];
+    };
 
+    $scope.deleteMe = () =>{
+        // console.log(users);
+        // console.log(loggedUser[0]);
+        users = users.filter(function(el){
+            return loggedUser[0]!=el.id;
+        });
+        // console.log(users);
+        $scope.goBack();
     };
 
     $scope.user = loggedUser[0];

@@ -81,11 +81,12 @@ button{
 
 .dashboard span.arrow{
     font-size: 60px;
-    margin-left: 2%;
+    /* margin-left: 2%; */
     cursor: pointer;
     animation: moving 3.5s ease-in-out infinite;
     z-index: 9999;
     position: absolute;
+    top:0;
 }
 
 @keyframes moving{
@@ -110,10 +111,10 @@ button{
 } 
 
 
-
-
 .content{
-    margin-top: 5%;
+    margin-top: 8%;
+    overflow: hidden;
+    text-align: center;
 }
 
 
@@ -201,4 +202,146 @@ button{
 
 #flipbook h2 + p{
     margin: 0;
+}
+
+
+
+
+
+/* CUBE */
+
+#container{
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 175px auto 0px;
+}
+
+input[value="play"]:checked ~ #container #cube {
+    animation: cubes 5s infinite linear;
+    animation-play-state: running;
+}
+
+input[value="pause"]:checked ~ #container #cube {
+    animation-play-state: paused;
+}
+
+input[value="rx"]:checked ~ #container #cube {
+    animation: rx1 5s infinite linear;
+}
+
+input[value="ry"]:checked ~ #container #cube {
+    animation: ry1 5s infinite linear;
+}
+
+
+input[value="rz"]:checked ~ #container #cube {
+    animation: rz1 5s infinite linear;
+}
+
+
+input[value="open"]:checked ~ #container #cube #leftc{
+    transform: rotateX(180deg) rotateZ(180deg) translateX(50px);
+}
+
+input[value="open"]:checked ~ #container #cube #rightc{
+    transform: rotateX(-180deg) rotateZ(180deg) translateX(-50px);
+}
+
+input[value="open"]:checked ~ #container #cube #topc{
+    transform: rotateY(-180deg) translateY(-250px);
+}
+
+input[value="open"]:checked ~ #container #cube #bottomc{
+    transform: rotateY(-180deg) translateY(250px);
+}
+
+
+#container div{
+    transition: 5s;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-color: rgb(0,0,0);
+}
+
+#cube {
+    transition: 10s;
+    transform-style: preserve-3d;
+    margin-left: 40%;
+    animation-play-state: paused;
+    animation-fill-mode: backwards;
+}
+
+@keyframes cubes {
+    0% {
+        transform: rotate3d(0,0,0,0deg);
+    }
+    100% {
+        transform: rotate3d(1,1,1,360deg)
+    }
+}
+
+@keyframes rx1 {
+    0% {
+        transform: rotateX(0deg);
+    }
+    100% {
+        transform: rotateX(360deg);
+    }
+}
+
+@keyframes ry1 {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes rz1 {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+#frontc{
+    background-image: url(dbz1.gif);
+}
+
+#leftc{
+    background-image: url(dbz2.gif);
+    transform-origin: left;
+    transform: rotateY(90deg);
+}
+
+#rightc{
+    background-image: url(dbz3.gif);
+    transform-origin: right;
+    transform: rotateY(-90deg);
+}
+
+#topc{
+    background-image: url(dbz4.gif);
+    transform-origin: top;
+    transform: rotateX(90deg) translateY(-200px);
+    
+}
+
+#bottomc{
+    background-image: url(dbz5.gif);
+    transform-origin: bottom;
+    transform: rotateX(90deg);
+    
+}
+
+#backc{
+    transform: translateZ(-200px);
+    background-image: url(dbz6.gif);
 }
