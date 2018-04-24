@@ -215,6 +215,7 @@ button{
     width: 500px;
     height: 500px;
     margin: 175px auto 0px;
+    z-index: -1;
 }
 
 input[value="play"]:checked ~ #container #cube {
