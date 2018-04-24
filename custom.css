@@ -312,30 +312,30 @@ input[value="open"]:checked ~ #container #cube #bottomc{
 }
 
 #frontc{
-    background-image: url(dbz1.gif);
+    background-image: url(./images/dbz1.gif);
 }
 
 #leftc{
-    background-image: url(dbz2.gif);
+    background-image: url(./images/dbz2.gif);
     transform-origin: left;
     transform: rotateY(90deg);
 }
 
 #rightc{
-    background-image: url(dbz3.gif);
+    background-image: url(./images/dbz3.gif);
     transform-origin: right;
     transform: rotateY(-90deg);
 }
 
 #topc{
-    background-image: url(dbz4.gif);
+    background-image: url(./images/dbz4.gif);
     transform-origin: top;
     transform: rotateX(90deg) translateY(-200px);
     
 }
 
 #bottomc{
-    background-image: url(dbz5.gif);
+    background-image: url(./images/dbz5.gif);
     transform-origin: bottom;
     transform: rotateX(90deg);
     
@@ -343,5 +343,5 @@ input[value="open"]:checked ~ #container #cube #bottomc{
 
 #backc{
     transform: translateZ(-200px);
-    background-image: url(dbz6.gif);
+    background-image: url(./images/dbz6.gif);
 }
